@@ -4,6 +4,6 @@ This repository is a central collection of code, documents, and other digital ob
 
 # Links
 
- - [Draft LOI](https://docs.google.com/document/d/1gyz5B1aKAioMDyVcnXryKmrTOBPAFmX0aw6mXfMY9k8/view)
+ - [Draft LOI](https://docs.google.com/document/d/1pWTcpl5ub9u4wQGo-cTTUKbCM3WmbLlw8BZgAFogj44/view)
  - [Project Description](https://docs.google.com/document/d/1TAgGpqMyWlRm_AbTSdaZF8kRLOhVGuu62Wlxi77nrtQ/view)
  - [Zotero Group](https://www.zotero.org/groups/5153502/bsta_517_-_pragmatic_p3_htn_trial/library)
