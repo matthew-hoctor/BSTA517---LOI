@@ -24,12 +24,12 @@ editor: source
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(dplyr)
-library(fmsb)                 # for radar chart/spider plot
+# library(dplyr)
+library(tidyverse)
 # library(readxl)
-# library(tidyverse)
+library(readODS)
 # library(rbbt)                 # for citation management tools
-# library(ggplot2)
+# library(ggplot2)            # for ggplot2
 # library(ggfortify)          # for ggdistribution function
 # library(TeachingDemos)      # for hpd() function
 # library(HDInterval)         # for hdi() function
@@ -38,8 +38,10 @@ library(fmsb)                 # for radar chart/spider plot
 library(knitr)
 library(kableExtra)
 library(data.table)
-# library(ggradar)            # a radar chart package
-library(readODS)
+library(fmsb)                 # for radar chart/spider plot
+# library(ggradar)            # another radar chart package
+# library(consortr)
+library(DiagrammeR)
 ```
 
 ```{r helper-functions, include = FALSE}
@@ -64,7 +66,6 @@ create_beautiful_radarchart <- function(data, color = "#00AFBB",
   )
 }
 ```
-
 
 # PRECIS-2 Criteria
 
@@ -99,10 +100,6 @@ create_beautiful_radarchart(
 )
 par(op)
 ```
-
-# Catherine's Questions 
- 
- - Composite endpoints
 
 \pagebreak
 
