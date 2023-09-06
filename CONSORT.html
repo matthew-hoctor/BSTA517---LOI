@@ -33,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="CONSORT_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="CONSORT_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="CONSORT_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<meta name="mermaid-theme" content="default">
 <script src="CONSORT_files/libs/quarto-diagram/mermaid.min.js"></script>
 <script src="CONSORT_files/libs/quarto-diagram/mermaid-init.js"></script>
 <link href="CONSORT_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
@@ -106,28 +107,49 @@ ul.task-list li input[type="checkbox"] {
   I[Allocation] --&gt;   J
   J[Followup  ] --&gt;   K
   K[Analysis  ] --&gt;   L
-  L[Endpoint  ]
+  L[Endpoints ] --&gt;   M
+  M[Family 1 &lt;br&gt;Tests] ---&gt; N
+  N[Family 2 &lt;br&gt;Test?]
 
   subgraph Enrollment
     H
     A([FQHC patient population, 25M&lt;br&gt;assessed for eligibility&lt;br&gt;n = 25M?]) --&gt;|Meets inclusion criteria&lt;br&gt;i.e. has HTN, on HCTZ&lt;br&gt;n = 5M?| B
     B(Primary provider consents&lt;br&gt;Provider informed of exclusion criteria&lt;br&gt;and does not contact excluded patients&lt;br&gt;n = 1.6M?) --&gt;|Provider requests and receives consent &lt;br&gt;from patient&lt;br&gt;n=0.5M?| C{Patient&lt;br&gt;randomized&lt;br&gt;N = 23,508+}
   end
-    C --&gt;|Switch to&lt;br&gt;Indapamide| D1[Indapamide arm&lt;br&gt;n = ?]
-    C --&gt;|HCTZ&lt;br&gt;Continuation| E1[Continuation of HCTZ&lt;br&gt;n = ?]
-    C --&gt;|Switch to&lt;br&gt;Chlorthalidone| F1[Chlorthalidone arm&lt;br&gt;n = ?]
-    D1 --&gt; D2[Loss to followup&lt;br&gt;n =  15,672?]
-    D2 --&gt; D3[Patient time accrues &lt;br&gt;3,9180+ patient-years?]
-    D3 --&gt; D4[Primary endpoint occurs&lt;br&gt;n = 3,506+?]
+    C --&gt;|Switch to&lt;br&gt;Indapamide| D1(Indapamide arm&lt;br&gt;n = ?)
+    C --&gt;|HCTZ&lt;br&gt;Continuation| E1(Continuation of HCTZ&lt;br&gt;n = ?)
+    C --&gt;|Switch to&lt;br&gt;Chlorthalidone| F1(Chlorthalidone arm&lt;br&gt;n = ?)
+    D1 --&gt; D2(Loss to followup&lt;br&gt;n =  15,672?)
+    D2 --&gt; D3(Patient time accrues &lt;br&gt;3,9180+ patient-years?)
+    D3 --&gt; D4(Primary endpoint occurs&lt;br&gt;n = 3,506+?)
   
 
-    E1 --&gt; E2[Loss to followup&lt;br&gt;n =  15,672?]
-    E2 --&gt; E3[Patient time accrues &lt;br&gt;39,180+ patient-years?]
-    E3 --&gt; E4[Primary endpoint occurs&lt;br&gt;n = 3,506+?]
+    E1 --&gt; E2(Loss to followup&lt;br&gt;n =  15,672?)
+    E2 --&gt; E3(Patient time accrues &lt;br&gt;39,180+ patient-years?)
+    E3 --&gt; E4(Primary endpoint occurs&lt;br&gt;n = 3,506+?)
 
-    F1 --&gt; F2[Loss to followup&lt;br&gt;n = 15,672?]
-    F2 --&gt; F3[Patient time accrues &lt;br&gt;39,180+ patient-years?]
-    F3 --&gt; F4[Primary endpoint occurs&lt;br&gt;n = 3,506+?]
+    F1 --&gt; F2(Loss to followup&lt;br&gt;n = 15,672?)
+    F2 --&gt; F3(Patient time accrues &lt;br&gt;39,180+ patient-years?)
+    F3 --&gt; F4(Primary endpoint occurs&lt;br&gt;n = 3,506+?)
+    
+    D4 --&gt; D5{Indapamide&lt;br&gt;vs HCTZ&lt;br&gt;α1 = α/2}
+    E4 --&gt; D5
+    E4 --&gt; E5{Chlorthalidone&lt;br&gt;vs HCTZ&lt;br&gt;α1 = α/2}
+    F4 --&gt; E5
+    
+    D5 --&gt; D6(Ho)
+    D5 --&gt; F6(Ha)
+    E5 --&gt; E6(Ho)
+    E5 --&gt; G6(Ha)
+    
+    D6 --&gt; D7[No Test]
+    E6 --&gt; D7
+    F6 --&gt; F7[Chlorthalidone&lt;br&gt; vs indapamide&lt;br&gt;α2 = α]
+    G6 --&gt; F7
+    D6 --&gt; E7[Chlorthalidone&lt;br&gt; vs indapamide&lt;br&gt;ɑ2 = 0.0125]
+    G6 --&gt; E7
+    E6 --&gt; G7[Chlorthalidone&lt;br&gt; vs indapamide&lt;br&gt;ɑ2 = 0.0125]
+    F6 --&gt; G7
     
   subgraph Allocation
     direction LR
@@ -152,12 +174,45 @@ ul.task-list li input[type="checkbox"] {
     E3
     F3
   end
-
-  style H fill:#f9f,stroke:#333,stroke-width:4px
-  style I fill:#f9f,stroke:#333,stroke-width:4px
-  style J fill:#f9f,stroke:#333,stroke-width:4px
-  style K fill:#f9f,stroke:#333,stroke-width:4px
-  style L fill:#f9f,stroke:#333,stroke-width:4px
+    
+  subgraph Endpoints
+    direction LR
+    L
+    D4
+    E4
+    F4
+  end
+    
+  subgraph Family 1 Tests
+    direction LR
+    M
+    D5
+    E5
+  end
+    
+  subgraph Family 2 Tests
+    direction LR
+    N
+    D7
+    subgraph ɑ2
+      direction LR
+      E7
+      G7
+    end
+    F7
+  end
+  
+  style C fill:#e20000,stroke:#333,stroke-width:4px
+  style D5 fill:#e20000,stroke:#333,stroke-width:4px
+  style E5 fill:#e20000,stroke:#333,stroke-width:4px
+  
+  style H fill:#00AFBB,stroke:#333,stroke-width:4px
+  style I fill:#00AFBB,stroke:#333,stroke-width:4px
+  style J fill:#00AFBB,stroke:#333,stroke-width:4px
+  style K fill:#00AFBB,stroke:#333,stroke-width:4px
+  style L fill:#00AFBB,stroke:#333,stroke-width:4px
+  style M fill:#00AFBB,stroke:#333,stroke-width:4px
+  style N fill:#00AFBB,stroke:#333,stroke-width:4px
 </pre>
 </div>
 </div>

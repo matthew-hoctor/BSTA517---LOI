@@ -16,7 +16,9 @@ code-overflow: wrap
 code-link: TRUE
 
 format:
-  html: default
+  html:
+    mermaid: 
+      theme: default
 
 editor: source
 ---
@@ -29,28 +31,49 @@ flowchart TB
   I[Allocation] -->   J
   J[Followup  ] -->   K
   K[Analysis  ] -->   L
-  L[Endpoint  ]
+  L[Endpoints ] -->   M
+  M[Family 1 <br>Tests] ---> N
+  N[Family 2 <br>Test?]
 
   subgraph Enrollment
     H
     A([FQHC patient population, 25M<br>assessed for eligibility<br>n = 25M?]) -->|Meets inclusion criteria<br>i.e. has HTN, on HCTZ<br>n = 5M?| B
     B(Primary provider consents<br>Provider informed of exclusion criteria<br>and does not contact excluded patients<br>n = 1.6M?) -->|Provider requests and receives consent <br>from patient<br>n=0.5M?| C{Patient<br>randomized<br>N = 23,508+}
   end
-    C -->|Switch to<br>Indapamide| D1[Indapamide arm<br>n = ?]
-    C -->|HCTZ<br>Continuation| E1[Continuation of HCTZ<br>n = ?]
-    C -->|Switch to<br>Chlorthalidone| F1[Chlorthalidone arm<br>n = ?]
-    D1 --> D2[Loss to followup<br>n =  15,672?]
-    D2 --> D3[Patient time accrues <br>3,9180+ patient-years?]
-    D3 --> D4[Primary endpoint occurs<br>n = 3,506+?]
+    C -->|Switch to<br>Indapamide| D1(Indapamide arm<br>n = ?)
+    C -->|HCTZ<br>Continuation| E1(Continuation of HCTZ<br>n = ?)
+    C -->|Switch to<br>Chlorthalidone| F1(Chlorthalidone arm<br>n = ?)
+    D1 --> D2(Loss to followup<br>n =  15,672?)
+    D2 --> D3(Patient time accrues <br>3,9180+ patient-years?)
+    D3 --> D4(Primary endpoint occurs<br>n = 3,506+?)
   
 
-    E1 --> E2[Loss to followup<br>n =  15,672?]
-    E2 --> E3[Patient time accrues <br>39,180+ patient-years?]
-    E3 --> E4[Primary endpoint occurs<br>n = 3,506+?]
+    E1 --> E2(Loss to followup<br>n =  15,672?)
+    E2 --> E3(Patient time accrues <br>39,180+ patient-years?)
+    E3 --> E4(Primary endpoint occurs<br>n = 3,506+?)
 
-    F1 --> F2[Loss to followup<br>n = 15,672?]
-    F2 --> F3[Patient time accrues <br>39,180+ patient-years?]
-    F3 --> F4[Primary endpoint occurs<br>n = 3,506+?]
+    F1 --> F2(Loss to followup<br>n = 15,672?)
+    F2 --> F3(Patient time accrues <br>39,180+ patient-years?)
+    F3 --> F4(Primary endpoint occurs<br>n = 3,506+?)
+    
+    D4 --> D5{Indapamide<br>vs HCTZ<br>α1 = α/2}
+    E4 --> D5
+    E4 --> E5{Chlorthalidone<br>vs HCTZ<br>α1 = α/2}
+    F4 --> E5
+    
+    D5 --> D6(Ho)
+    D5 --> F6(Ha)
+    E5 --> E6(Ho)
+    E5 --> G6(Ha)
+    
+    D6 --> D7[No Test]
+    E6 --> D7
+    F6 --> F7[Chlorthalidone<br> vs indapamide<br>α2 = α]
+    G6 --> F7
+    D6 --> E7[Chlorthalidone<br> vs indapamide<br>ɑ2 = 0.0125]
+    G6 --> E7
+    E6 --> G7[Chlorthalidone<br> vs indapamide<br>ɑ2 = 0.0125]
+    F6 --> G7
     
   subgraph Allocation
     direction LR
@@ -75,10 +98,43 @@ flowchart TB
     E3
     F3
   end
-
-  style H fill:#f9f,stroke:#333,stroke-width:4px
-  style I fill:#f9f,stroke:#333,stroke-width:4px
-  style J fill:#f9f,stroke:#333,stroke-width:4px
-  style K fill:#f9f,stroke:#333,stroke-width:4px
-  style L fill:#f9f,stroke:#333,stroke-width:4px
+    
+  subgraph Endpoints
+    direction LR
+    L
+    D4
+    E4
+    F4
+  end
+    
+  subgraph Family 1 Tests
+    direction LR
+    M
+    D5
+    E5
+  end
+    
+  subgraph Family 2 Tests
+    direction LR
+    N
+    D7
+    subgraph ɑ2
+      direction LR
+      E7
+      G7
+    end
+    F7
+  end
+  
+  style C fill:#e20000,stroke:#333,stroke-width:4px
+  style D5 fill:#e20000,stroke:#333,stroke-width:4px
+  style E5 fill:#e20000,stroke:#333,stroke-width:4px
+  
+  style H fill:#00AFBB,stroke:#333,stroke-width:4px
+  style I fill:#00AFBB,stroke:#333,stroke-width:4px
+  style J fill:#00AFBB,stroke:#333,stroke-width:4px
+  style K fill:#00AFBB,stroke:#333,stroke-width:4px
+  style L fill:#00AFBB,stroke:#333,stroke-width:4px
+  style M fill:#00AFBB,stroke:#333,stroke-width:4px
+  style N fill:#00AFBB,stroke:#333,stroke-width:4px
 ```
