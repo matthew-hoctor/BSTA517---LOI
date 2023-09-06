@@ -41,7 +41,7 @@ library(data.table)
 library(fmsb)                 # for radar chart/spider plot
 # library(ggradar)            # another radar chart package
 # library(consortr)
-library(DiagrammeR)
+# library(DiagrammeR)
 ```
 
 ```{r helper-functions, include = FALSE}
