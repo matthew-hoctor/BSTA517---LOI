@@ -1,0 +1,130 @@
+---
+title: "CONSORT Diagram"
+authors: 
+  - "Kellen Stark"
+  - "Matthew Hoctor, PharmD"
+institute: "Oregon Health & Science University-Portland State University, School of Public Health"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+
+toc: TRUE
+toc-depth: 2
+toc-location: left
+toc-title: Contents
+
+code-fold: TRUE
+code-overflow: wrap
+code-link: TRUE
+
+format:
+  html: default
+
+editor: source
+---
+
+# CONSORT Diagram
+
+```{mermaid}
+flowchart TB
+  H[Enrollment] ----> I
+  I[Allocation] -->   J
+  J[Followup  ] -->   K
+  K[Analysis  ] -->   L
+  L[Endpoint  ]
+
+  subgraph Enrollment
+    H
+    A([FQHC patient population, 25M<br>assessed for eligibility<br>n = 25M?]) -->|Meets inclusion criteria<br>i.e. has HTN, on HCTZ<br>n = 5M?| B
+    B(Primary provider consents<br>Provider informed of exclusion criteria<br>and does not contact excluded patients<br>n = 1.6M?) -->|Provider requests and receives consent <br>from patient<br>n=0.5M?| C{Patient<br>randomized<br>N = 23,508+}
+  end
+    C -->|Switch to<br>Indapamide| D1[Indapamide arm<br>n = ?]
+    C -->|HCTZ<br>Continuation| E1[Continuation of HCTZ<br>n = ?]
+    C -->|Switch to<br>Chlorthalidone| F1[Chlorthalidone arm<br>n = ?]
+    D1 --> D2[Loss to followup<br>n =  15,672?]
+    D2 --> D3[Patient time accrues <br>3,9180+ patient-years?]
+    D3 --> D4[Primary endpoint occurs<br>n = 3,506+?]
+  
+
+    E1 --> E2[Loss to followup<br>n =  15,672?]
+    E2 --> E3[Patient time accrues <br>39,180+ patient-years?]
+    E3 --> E4[Primary endpoint occurs<br>n = 3,506+?]
+
+    F1 --> F2[Loss to followup<br>n = 15,672?]
+    F2 --> F3[Patient time accrues <br>39,180+ patient-years?]
+    F3 --> F4[Primary endpoint occurs<br>n = 3,506+?]
+    
+  subgraph Allocation
+    direction LR
+    I
+    D1
+    E1
+    F1
+  end
+    
+  subgraph Followup
+    direction LR
+    J
+    D2
+    E2
+    F2
+  end
+    
+  subgraph Analysis
+    direction LR
+    K
+    D3
+    E3
+    F3
+  end
+
+  style H fill:#f9f,stroke:#333,stroke-width:4px
+  style I fill:#f9f,stroke:#333,stroke-width:4px
+  style J fill:#f9f,stroke:#333,stroke-width:4px
+  style K fill:#f9f,stroke:#333,stroke-width:4px
+  style L fill:#f9f,stroke:#333,stroke-width:4px
+```
+
+```{mermaid}
+%%| fig-width: 6.5
+flowchart LR
+  subgraph TOP
+    direction TB
+    subgraph B1
+        direction RL
+        i1 -->f1
+    end
+    subgraph B2
+        direction BT
+        i2 -->f2
+    end
+  end
+  A --> TOP --> B
+  B1 --> B2
+```
+
+```{mermaid}
+flowchart TB
+
+H[Enrollment] ----> I
+I[Allocation] -->   J
+J[Followup  ] -->   K
+K[Analysis  ] -->   L
+L[Endpoint  ]
+
+    A([FQHC patient population, 25M<br>assessed for eligibility<br>n = 25M?]) -->|Meets inclusion criteria<br>i.e. has HTN, on HCTZ<br>n = 5M?| B
+    B(Primary provider consents<br>Provider informed of exclusion criteria<br>and does not contact excluded patients<br>n = 1.6M?) -->|Provider requests and receives consent <br>from patient<br>n=0.5M?| C{Patient<br>randomized<br>N = 23,508+}
+    C -->|indapamide| D1[Switch to indapamide<br>n = ?]
+    C -->|HCTZ<br>continuation| E1[Continuation of HCTZ<br>n = ?]
+    C -->|chlorthalidone| F1[Switch to chlorthalidone<br>n=?]
+
+    D1 --> D2[Loss to followup<br>n =  15,672?]
+    D2 --> D3[Patient time accrues <br>3,9180+ patient-years?]
+    D3 --> D4[Primary endpoint occurs<br>n = 3,506+?]
+
+    E1 --> E2[Loss to followup<br>n =  15,672?]
+    E2 --> E3[Patient time accrues <br>39,180+ patient-years?]
+    E3 --> E4[Primary endpoint occurs<br>n = 3,506+?]
+
+    F1 --> F2[Loss to followup<br>n = 15,672?]
+    F2 --> F3[Patient time accrues <br>39,180+ patient-years?]
+    F3 --> F4[Primary endpoint occurs<br>n = 3,506+?]
+```
